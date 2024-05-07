@@ -28,7 +28,6 @@
 </header>
 
 <body id="perfil">
-
     <?php
     //conexion base de datos
     include "Conexion.php";

@@ -25,6 +25,7 @@
             ?>
         </div>
 </div>
+
     <?php
     include "Conexion.php";
     $id_producto = $_GET["id"];
