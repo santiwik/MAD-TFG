@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="index.css">
     <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
 <div id="barra">
         <div>
