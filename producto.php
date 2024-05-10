@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<div id="barra">
+<header>
         <div>
             <a href="index.php"><img id="logo" src="img/ri8566rddb-riot-games-logo-riot-games-logo-download-vector.png"></a>
         </div>
@@ -24,7 +24,7 @@
             }
             ?>
         </div>
-</div>
+</header>
 
     <?php
     include "Conexion.php";
@@ -37,10 +37,9 @@
         $ID = $fila["ID"];
         $Nombre = $fila["Nombre"];
         $foto = $fila["foto"];
-        $precio = $fila["precio"];
         $descripcion = $fila["descripcion"];
-        $edicion = $fila["edicion"];
-        $juego = $fila["juego"];
+        $precio = $fila["precio"];
+        $stock = $fila["stock"];
     }
     echo "<title>$Nombre</title>";
     if (isset($_POST["carrito"])) {

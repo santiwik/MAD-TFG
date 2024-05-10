@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="barra">
+<header>
     <div>
         <a href="index.php"><img id="logo" src="img/ri8566rddb-riot-games-logo-riot-games-logo-download-vector.png"></a>
     </div>
@@ -22,10 +22,7 @@
         }
         ?>
     </div>
-</div>
-<div>
-    <img id="lux" src="img/Porcelain_Lunar_Revel_2024_Promo_Homepage_Hero_2560x722.webp">
-</div>
+</header>
 <div id="venta">
     <?php
     include "Conexion.php";
@@ -46,8 +43,7 @@
         echo "<p id=\"precio\">$precio</p>";
         echo "</a>";
         echo "</div>";
-    }
-    
+    }    
     ?>
 </div>
 </body>

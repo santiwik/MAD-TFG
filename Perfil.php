@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
 </head>
 <header>
-    <div id="barra">
+    <header>
         <div>
             <a href="index.php"><img id="logo" src="img/ri8566rddb-riot-games-logo-riot-games-logo-download-vector.png"></a>
         </div>
