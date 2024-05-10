@@ -1,4 +1,8 @@
 -- Crear la tabla de Usuarios
+drop database tfg_mad;
+create database tfg_mad;
+use tfg_mad;
+
 CREATE TABLE Usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(255) NOT NULL,
@@ -30,3 +34,12 @@ CREATE TABLE Roles_Permisos (
     FOREIGN KEY (rol_id) REFERENCES Roles(id),
     FOREIGN KEY (permiso_id) REFERENCES Permisos(id)
 );
+
+-- Crear la tabla de Productos
+CREATE TABLE Productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_producto VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(5, 2) NOT NULL,
+    stock INT NOT NULL
+); 

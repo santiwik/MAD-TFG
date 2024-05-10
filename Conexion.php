@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost";
-    $dbname = "phpbd2";
-    $username = "Daniel";
+    $dbname = "TFG_MAD";
+    $username = "MAD";
     $password = "";
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
