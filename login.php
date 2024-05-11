@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
   <?php
   session_start();
   require_once 'vendor/autoload.php';
@@ -18,30 +19,30 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  if (isset($_GET['code'])) {
-    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token['access_token']);
 
-    $google_oauth = new Google_Service_Oauth2($client);
-    $google_account_info = $google_oauth->userinfo->get();
-    $email =  $google_account_info->email;
-    $name =  $google_account_info->name;
-
-    echo $email . '<br>';
-    echo $name;
-  }
+  $inicio = "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
   ?>
 </head>
 
 <body>
   <header>
-  <?php
-        include "header.php";
-        ?>
+    <?php
+    include "header.php";
+    ?>
   </header>
   <main>
+    <form method="post">
+      <legend>Iniciar Sesi&oacute;n</legend>
+      <?php
+    echo $inicio;
+    ?>
+    <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
+    </form>
 
   </main>
-  <footer </body>
+  <footer>
+
+  </footer>
+</body>
 
 </html>
