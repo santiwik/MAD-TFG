@@ -27,6 +27,16 @@
     $email =  $google_account_info->email;
     $name =  $google_account_info->name;
 
+    /*Registro google*/
+    $sql = $conn->prepare("select user from usuarios where user=?");
+    $sql->bind_param("s", $name);
+    $sql->execute();
+    $result = $sql->get_result();
+    if($result->num_rows != 1){
+      $sql = $conn -> prepare("insert into usuarios(user,email) values(?,?)");
+      $sql->bind_param("ss", $name, $email);
+      $sql->execute();
+    }
     echo $email . '<br>';
     echo $name;
   }
