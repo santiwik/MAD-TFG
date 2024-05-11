@@ -1,7 +1,7 @@
 <h1><a href="index.php">MAD-TFG</a></h1>
 
 <?php
-if (!isset($_SESSION["User"])) {
+if (!isset($_SESSION["user"])) {
     echo '<div>';
     echo '    <a href="login.php">Inicia sesión</a>';
     echo '    <a href="register.php">Regístrate</a>';

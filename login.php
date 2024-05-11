@@ -11,7 +11,7 @@
   session_start();
   include "connection.php";
   if (isset($_SESSION["user"])) {
-    header("profile.php");
+    header("Location:profile.php");
     exit();
   }
 
@@ -26,7 +26,7 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  $inicio = "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
+  $inicio = "<a href='" . $client->createAuthUrl() . "'>Inicia sesion con Google</a>";
 
   /*Inicio sesion normal*/
 
@@ -55,7 +55,7 @@
       if (password_verify($_POST["pwd"], $pwd) && $usrconfirm == true) {
         $_SESSION["user"] = $_POST["user"];
         $_SESSION["rol"] = $row["rol"];
-        header("profile.php");
+        header("Location:profile.php");
       } else {
         $_SESSION["error"] = "La contraseña es incorrecta";
       }
@@ -75,23 +75,24 @@
     <form method="post">
       <legend>Iniciar Sesi&oacute;n</legend>
       <div>
-        <?php
-        if (isset($_SESSION["error"])) {
-          echo "<div>";
-          echo $_SESSION["error"];
-          echo "</div>";
-        }
-        ?>
         <label for="user">Usuario: </label>
-        <input type="text" name="user">
+        <input type="text" name="user" required>
       </div>
       <div>
         <label for="pwd">Contrase&ntilde;a: </label>
-        <input type="password" name="pwd">
+        <input type="password" name="pwd" required>
       </div>
       <div>
         <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
       </div>
+      <?php
+      if (isset($_SESSION["error"])) {
+        echo "<div>";
+        echo $_SESSION["error"];
+        echo "</div>";
+        unset( $_SESSION["error"]);
+      }
+      ?>
       <?php
       echo $inicio;
       ?>
