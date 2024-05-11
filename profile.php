@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil</title>
-    <link rel="stylesheet" href="css/style.css">
-    <?php
-    session_start();
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil</title>
+  <link rel="stylesheet" href="css/style.css">
+  <?php
+  session_start();
   include "connection.php";
   require_once 'vendor/autoload.php';
   require_once 'config.php';
-
+  if (!isset($_SESSION["user"])) {
+    header("Location:login.php");
+    exit();
+}
   $client = new Google_Client();
   $client->setClientId($clientID);
   $client->setClientSecret($clientSecret);
@@ -32,25 +36,36 @@
     $sql->bind_param("s", $name);
     $sql->execute();
     $result = $sql->get_result();
-    if($result->num_rows != 1){
-      $sql = $conn -> prepare("insert into usuarios(user,email) values(?,?)");
+    if ($result->num_rows != 1) {
+      $sql = $conn->prepare("insert into usuarios(user,email) values(?,?)");
       $sql->bind_param("ss", $name, $email);
       $sql->execute();
+    }
+    $_SESSION["user"] = $name;
+    $sql = $conn->prepare("select rol from usuarios where user=?");
+    $sql->bind_param("s", $name);
+    $sql->execute();
+    $result = $sql->get_result();
+    if ($row = $result->fetch_assoc()) {
+      $_SESSION["rol"] = $row["rol"];
     }
     echo $email . '<br>';
     echo $name;
   }
+
   ?>
 </head>
+
 <body>
-    <header>
+  <header>
 
-    </header>
-    <main>
+  </header>
+  <main>
 
-    </main>
-    <footer>
+  </main>
+  <footer>
 
-    </footer>
+  </footer>
 </body>
+
 </html>

@@ -7,6 +7,10 @@
     <title>Inicio</title>
     <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
+    <?php
+    session_start();
+    include "connection.php";
+    ?>
 </head>
 
 <body>
