@@ -6,7 +6,8 @@
     <title>Mi Perfil</title>
     <link rel="stylesheet" href="css/style.css">
     <?php
-  session_start();
+    session_start();
+  include "connection.php";
   require_once 'vendor/autoload.php';
   require_once 'config.php';
 

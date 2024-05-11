@@ -91,7 +91,7 @@ abstract class Random
             session_id(1);
             ini_set('session.use_cookies', 0);
             session_cache_limiter('');
-            session_start();
+              session_start();
 
             $v = (isset($_SERVER) ? self::safe_serialize($_SERVER) : '') .
                  (isset($_POST) ? self::safe_serialize($_POST) : '') .
