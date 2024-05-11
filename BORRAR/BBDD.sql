@@ -2,6 +2,15 @@ drop database tfg_mad;
 create database tfg_mad;
 use tfg_mad;
 
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 11-05-2024 a las 17:12:15
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -80,8 +89,15 @@ CREATE TABLE `producto` (
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `count` int(255) NOT NULL
+  `count` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `count`) VALUES
+(1, 'Usuario normal', NULL);
 
 -- --------------------------------------------------------
 
@@ -92,13 +108,20 @@ CREATE TABLE `roles` (
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `user` varchar(20) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `surname` varchar(20) NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `surname` varchar(20) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
-  `pwd` varchar(254) NOT NULL,
-  `rol` int(11) NOT NULL DEFAULT 0,
+  `pwd` varchar(254) DEFAULT NULL,
+  `rol` int(11) NOT NULL DEFAULT 1,
   `whencreated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `user`, `name`, `surname`, `email`, `pwd`, `rol`, `whencreated`) VALUES
+(2, 'santiwik ___', NULL, NULL, 'danielsantiso04@gmail.com', NULL, 1, '2024-05-11 15:05:12');
 
 --
 -- Índices para tablas volcadas
@@ -143,6 +166,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user` (`user`),
   ADD KEY `rol` (`rol`);
 
 --
@@ -177,13 +201,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
