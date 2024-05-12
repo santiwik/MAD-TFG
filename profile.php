@@ -75,6 +75,35 @@ use Google\Service\Classroom\Name;
     } else{
       $changed=$row["direction"];
     }
+    if(isset($_POST["datos"])){
+      $changen2 = !empty($_POST['changen']) ? $_POST['changen'] : null;
+      $changea2 = !empty($_POST['changea']) ? $_POST['changea'] : null;
+      $changed2 = !empty($_POST['changed']) ? $_POST['changed'] : null;
+  
+      if ($changen2 !== null) {
+        $sql = $conn->prepare("UPDATE usuarios SET name = ? WHERE id = ?");
+        $sql->bind_param("ss", $changen2, $row["id"]);
+        if (!$sql->execute()) {
+            echo "Error al actualizar el nombre: " . $sql->error;
+        }
+    }
+    if ($changea2 !== null) {
+        $sql = $conn->prepare("UPDATE usuarios SET surname = ? WHERE id = ?");
+        $sql->bind_param("ss", $changea2, $row["id"]);
+        if (!$sql->execute()) {
+            echo "Error al actualizar el apellido: " . $sql->error;
+        }
+    }
+    if ($changed2 !== null) {
+        $sql = $conn->prepare("UPDATE usuarios SET direction = ? WHERE id = ?");
+        $sql->bind_param("ss", $changed2, $row["id"]);
+        if (!$sql->execute()) {
+            echo "Error al actualizar la dirección: " . $sql->error;
+        }
+    }
+    
+  }
+  
   }
   
   ?>
@@ -100,6 +129,7 @@ use Google\Service\Classroom\Name;
       <input name="changea" type="text" placeholder="<?php if(isset($changea)){ echo $changea; }?>">
       <label for="changed">Cambiar direcci&oacute;n de domicilio: </label>
       <input name="changea" type="text" placeholder="<?php if(isset($changed)){ echo $changed; }?>">
+      <input type="submit" name="datos" value="Actualizar">
     </form>
   </main>
   <footer>
