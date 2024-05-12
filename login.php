@@ -100,7 +100,7 @@
         <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
       </div>
       <div>
-        <input type="submit" name="google" value="Iniciar sesi&oactue;n con google">
+        <input type="submit" name="google" value="Iniciar sesión con Google">
       </div>
       <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
     </form>
