@@ -26,7 +26,7 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  $inicio = "<a href='" . $client->createAuthUrl() . "'>Inicia sesion con Google</a>";
+  $inicio = "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
 
   /*Inicio sesion normal*/
 
@@ -55,7 +55,7 @@
       if (password_verify($_POST["pwd"], $pwd) && $usrconfirm == true) {
         $_SESSION["user"] = $_POST["user"];
         $_SESSION["rol"] = $row["rol"];
-        header("Location:profile.php");
+        header("profile.php");
       } else {
         $_SESSION["error"] = "La contraseña es incorrecta";
       }
@@ -72,33 +72,33 @@
     ?>
   </header>
   <main>
+    <div>
     <form method="post">
-      <legend>Iniciar Sesi&oacute;n</legend>
-      <div>
-        <label for="user">Usuario: </label>
-        <input type="text" name="user" required>
+      <legend><h1>Iniciar Sesi&oacute;n</h1></legend>
+      <div class="usuario">
+        <?php
+        if (isset($_SESSION["error"])) {
+          echo "<div>";
+          echo $_SESSION["error"];
+          echo "</div>";
+        }
+        ?>
+        <label for="user"> </label>
+        <input type="text" name="user" placeholder="Usuario">
       </div>
-      <div>
-        <label for="pwd">Contrase&ntilde;a: </label>
-        <input type="password" name="pwd" required>
+      <div class="contraseña">
+        <label for="pwd"></label>
+        <input type="password" name="pwd" placeholder="Contraseña">
       </div>
       <div>
         <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
       </div>
       <?php
-      if (isset($_SESSION["error"])) {
-        echo "<div>";
-        echo $_SESSION["error"];
-        echo "</div>";
-        unset( $_SESSION["error"]);
-      }
-      ?>
-      <?php
       echo $inicio;
       ?>
       <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
     </form>
-
+    </div>
   </main>
   <footer>
 
