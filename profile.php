@@ -22,7 +22,7 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  if (isset($_GET['code'])) {
+  if (isset($_GET['code']) &&  $_SESSION["google"] = 1) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     $client->setAccessToken($token['access_token']);
 
@@ -49,6 +49,8 @@
     if ($row = $result->fetch_assoc()) {
       $_SESSION["rol"] = $row["rol"];
     }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
   }
   if (isset($_POST["cerrar"])) {
     session_destroy();

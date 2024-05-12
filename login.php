@@ -26,8 +26,14 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  $inicio = "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
+  if(isset($_POST["google"])){
+    $_SESSION["google"] = 1;
+    $authUrl = $client->createAuthUrl();
+    header("Location: $authUrl");
+    exit();
+}
 
+  
   /*Inicio sesion normal*/
 
   /*Comprobacion de usuario*/
@@ -93,9 +99,9 @@
       <div>
         <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
       </div>
-      <?php
-      echo $inicio;
-      ?>
+      <div>
+        <input type="submit" name="google" value="Iniciar sesi&oactue;n con google">
+      </div>
       <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
     </form>
     </div>

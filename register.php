@@ -25,32 +25,36 @@
     $client->addScope("email");
     $client->addScope("profile");
 
-    $inicio = "<a href='" . $client->createAuthUrl() . "'>Registrate con Google</a>";
+    if (isset($_POST["google"])) {
+        $_SESSION["google"] = 1;
+        $authUrl = $client->createAuthUrl();
+        header("Location: $authUrl");
+        exit();
+    }
 
     /*Registro*/
-    if(isset($_POST["registro"])){
+    if (isset($_POST["registro"])) {
         /*Error Usuario*/
         $sql = $conn->prepare("select user from usuarios where user = ?");
-        $sql->bind_param("s",$_POST["user"]);
+        $sql->bind_param("s", $_POST["user"]);
         $sql->execute();
         $result = $sql->get_result();
-        if($result->num_rows == 1){
+        if ($result->num_rows == 1) {
             $_SESSION["error"] = "Este usuario ya esta registrado, prueba a iniciar sesion o usar otro usuario";
-            $usrbad=true;
+            $usrbad = true;
         } else {
-            $usrbad=false;
+            $usrbad = false;
         }
         $sql = $conn->prepare("insert into usuarios (user, email, pwd) values(?,?,?)");
-        if($usrbad==false){
-            if($_POST["pwd"] != $_POST["cpwd"]){
+        if ($usrbad == false) {
+            if ($_POST["pwd"] != $_POST["cpwd"]) {
                 $_SESSION["error"] = "Las contraseñas no coinciden";
             } else {
-                $hash = password_hash($_POST["pwd"], PASSWORD_DEFAULT );
-                $sql -> bind_param("sss", $_POST["user"], $_POST["email"], $hash);
-                if($sql -> execute()){
+                $hash = password_hash($_POST["pwd"], PASSWORD_DEFAULT);
+                $sql->bind_param("sss", $_POST["user"], $_POST["email"], $hash);
+                if ($sql->execute()) {
                     header("Location:login.php");
                 }
-                
             }
         }
     }
@@ -89,13 +93,13 @@
             if (isset($_SESSION["error"])) {
                 echo "<div>";
                 echo $_SESSION["error"];
-                unset( $_SESSION["error"]);
+                unset($_SESSION["error"]);
                 echo "</div>";
             }
             ?>
-            <?php
-            echo $inicio;
-            ?>
+            <div>
+                <input type="submit" name="google" value="Registrate con Google">
+            </div>
             <p>¿Tienes cuenta? <a href="register.php">Inicia sesi&oacute;n</a></p>
         </form>
     </main>
