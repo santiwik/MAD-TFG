@@ -81,7 +81,7 @@
     <div>
     <form method="post">
       <legend><h1>Iniciar Sesi&oacute;n</h1></legend>
-      <div class="usuario">
+      <div class="input-text">
         <?php
         if (isset($_SESSION["error"])) {
           echo "<div>";
@@ -92,7 +92,7 @@
         <label for="user"> </label>
         <input type="text" name="user" placeholder="Usuario">
       </div>
-      <div class="contraseña">
+      <div class="input-text">
         <label for="pwd"></label>
         <input type="password" name="pwd" placeholder="Contraseña">
       </div>
