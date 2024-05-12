@@ -26,14 +26,14 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  if(isset($_POST["google"])){
+  if (isset($_POST["google"])) {
     $_SESSION["google"] = 1;
     $authUrl = $client->createAuthUrl();
     header("Location: $authUrl");
     exit();
-}
+  }
 
-  
+
   /*Inicio sesion normal*/
 
   /*Comprobacion de usuario*/
@@ -79,31 +79,34 @@
   </header>
   <main>
     <div>
-    <form method="post">
-      <legend><h1>Iniciar Sesi&oacute;n</h1></legend>
-      <div class="input-text">
-        <?php
-        if (isset($_SESSION["error"])) {
-          echo "<div>";
-          echo $_SESSION["error"];
-          echo "</div>";
-        }
-        ?>
-        <label for="user"> </label>
-        <input type="text" name="user" placeholder="Usuario">
-      </div>
-      <div class="input-text">
-        <label for="pwd"></label>
-        <input type="password" name="pwd" placeholder="Contraseña">
-      </div>
-      <div>
-        <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
-      </div>
-      <div>
-        <input type="submit" name="google" value="Iniciar sesión con Google">
-      </div>
-      <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
-    </form>
+      <form method="post">
+        <legend>
+          <h1>Iniciar Sesi&oacute;n</h1>
+        </legend>
+        <div class="input-text">
+          <?php
+          if (isset($_SESSION["error"])) {
+            echo "<div>";
+            echo $_SESSION["error"];
+            unset($_SESSION["error"]);
+            echo "</div>";
+          }
+          ?>
+          <label for="user"> </label>
+          <input type="text" name="user" placeholder="Usuario">
+        </div>
+        <div class="input-text">
+          <label for="pwd"></label>
+          <input type="password" name="pwd" placeholder="Contraseña">
+        </div>
+        <div>
+          <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
+        </div>
+        <div>
+          <input type="submit" name="google" value="Iniciar sesión con Google">
+        </div>
+        <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
+      </form>
     </div>
   </main>
   <footer>

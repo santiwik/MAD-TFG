@@ -83,9 +83,6 @@
       $changed2 = !empty($_POST['changed']) ? $_POST['changed'] : null;
 
       if ($changen2 !== null || $changea2 !== null || $changed2 !== null) {
-        // Al menos uno de los campos tiene datos, procede con la actualización
-
-        // Verificar y actualizar el nombre
         if ($changen2 !== null) {
           $sql = $conn->prepare("UPDATE usuarios SET name = ? WHERE id = ?");
           $sql->bind_param("ss", $changen2, $row["id"]);
@@ -112,6 +109,22 @@
       } else {
         echo "No se proporcionaron datos para actualizar.";
       }
+      if (isset($_POST["pwdchange"])) {
+        $sql = $conn->prepare("select pwd from usuarios where user=?");
+        $sql->bind_param("s", $_SESSION["user"]);
+        $sql->execute();
+        $result = $sql->get_result();
+        if ($row = $result->fetch_assoc()) {
+          $pwd = $row["pwd"];
+        }
+        if (!is_null($pwd)) {
+          if ($_POST["changec1"] == $_POST["changec2"] && password_verify($_POST["changec"], $pwd)) {
+            echo "hola";
+          }
+        } else{
+          $_SESSION["error"] = "Porfavor inicice sesion con una cuenta que no sea de google para cambiar la contraseña";
+        }
+      }
     }
   }
 
@@ -125,6 +138,14 @@
     ?>
   </header>
   <main>
+    <?php
+    if (isset($_SESSION["error"])) {
+      echo "<div>";
+      echo $_SESSION["error"];
+      unset($_SESSION["error"]);
+      echo "</div>";
+    }
+    ?>
     <!--Cerrado de sesion-->
     <form method="post">
       <input type="submit" name="cerrar" value="Cerrar Sesión">
@@ -145,6 +166,16 @@
                                                         echo $changed;
                                                       } ?>">
       <input type="submit" name="datos" value="Actualizar">
+    </form>
+    <form method="post">
+      <legend>Cambiar la contraseña</legend>
+      <label for="changec">Contrase&ntilde;a actual: </label>
+      <input name="changec" type="password">
+      <label for="changec">Nueva contrase&ntilde;a: </label>
+      <input name="changec1" type="password">
+      <label for="changec">Confirme nueva contrase&ntilde;a: </label>
+      <input name="changec2" type="password">
+      <input type="submit" name="pwdchange" value="Cambiar contraseña">
     </form>
   </main>
   <footer>
