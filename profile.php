@@ -9,7 +9,7 @@
   <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
   <?php
 
-use Google\Service\Classroom\Name;
+  use Google\Service\Classroom\Name;
 
   session_start();
   include "connection.php";
@@ -54,58 +54,65 @@ use Google\Service\Classroom\Name;
     session_destroy();
     header("Location:index.php");
   }
-  if(isset($_SESSION["user"])){
-    $sql=$conn->prepare("select * from usuarios where user=?");
+  if (isset($_SESSION["user"])) {
+    $sql = $conn->prepare("select * from usuarios where user=?");
     $sql->bind_param("s", $_SESSION["user"]);
     $sql->execute();
     $result = $sql->get_result();
-    $row=$result->fetch_assoc();
-    if(is_null($row["name"])){
-      $changen="Porfavor añada su nombre";
-    } else{
-      $changen=$row["name"];
+    $row = $result->fetch_assoc();
+    if (is_null($row["name"])) {
+      $changen = "Porfavor añada su nombre";
+    } else {
+      $changen = $row["name"];
     }
-    if(is_null($row["surname"])){
-      $changea="Porfavor añada su apellido";
-    } else{
-      $changea=$row["surname"];
+    if (is_null($row["surname"])) {
+      $changea = "Porfavor añada su apellido";
+    } else {
+      $changea = $row["surname"];
     }
-    if(is_null($row["direction"])){
-      $changed="Porfavor añada su direcci&oacute;n de domicilio";
-    } else{
-      $changed=$row["direction"];
+    if (is_null($row["direction"])) {
+      $changed = "Porfavor añada su direcci&oacute;n de domicilio";
+    } else {
+      $changed = $row["direction"];
     }
-    if(isset($_POST["datos"])){
+    if (isset($_POST["datos"])) {
       $changen2 = !empty($_POST['changen']) ? $_POST['changen'] : null;
       $changea2 = !empty($_POST['changea']) ? $_POST['changea'] : null;
       $changed2 = !empty($_POST['changed']) ? $_POST['changed'] : null;
-  
-      if ($changen2 !== null) {
-        $sql = $conn->prepare("UPDATE usuarios SET name = ? WHERE id = ?");
-        $sql->bind_param("ss", $changen2, $row["id"]);
-        if (!$sql->execute()) {
+
+      if ($changen2 !== null || $changea2 !== null || $changed2 !== null) {
+        // Al menos uno de los campos tiene datos, procede con la actualización
+
+        // Verificar y actualizar el nombre
+        if ($changen2 !== null) {
+          $sql = $conn->prepare("UPDATE usuarios SET name = ? WHERE id = ?");
+          $sql->bind_param("ss", $changen2, $row["id"]);
+          if (!$sql->execute()) {
             echo "Error al actualizar el nombre: " . $sql->error;
+          }
         }
-    }
-    if ($changea2 !== null) {
-        $sql = $conn->prepare("UPDATE usuarios SET surname = ? WHERE id = ?");
-        $sql->bind_param("ss", $changea2, $row["id"]);
-        if (!$sql->execute()) {
+        if ($changea2 !== null) {
+          $sql = $conn->prepare("UPDATE usuarios SET surname = ? WHERE id = ?");
+          $sql->bind_param("ss", $changea2, $row["id"]);
+          if (!$sql->execute()) {
             echo "Error al actualizar el apellido: " . $sql->error;
+          }
         }
-    }
-    if ($changed2 !== null) {
-        $sql = $conn->prepare("UPDATE usuarios SET direction = ? WHERE id = ?");
-        $sql->bind_param("ss", $changed2, $row["id"]);
-        if (!$sql->execute()) {
+        if ($changed2 !== null) {
+          $sql = $conn->prepare("UPDATE usuarios SET direction = ? WHERE id = ?");
+          $sql->bind_param("ss", $changed2, $row["id"]);
+          if (!$sql->execute()) {
             echo "Error al actualizar la dirección: " . $sql->error;
+          }
         }
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+      } else {
+        echo "No se proporcionaron datos para actualizar.";
+      }
     }
-    
   }
-  
-  }
-  
+
   ?>
 </head>
 
@@ -124,11 +131,11 @@ use Google\Service\Classroom\Name;
     <form method="post">
       <legend>Cambiar datos Personales </legend>
       <label for="changen">Cambiar nombre: </label>
-      <input name="changen" type="text" placeholder="<?php if(isset($changen)){ echo $changen; }?>">
+      <input name="changen" type="text" placeholder="<?php if (isset($changen)) { echo $changen;} ?>">
       <label for="changea">Cambiar apellido: </label>
-      <input name="changea" type="text" placeholder="<?php if(isset($changea)){ echo $changea; }?>">
+      <input name="changea" type="text" placeholder="<?php if (isset($changea)) {echo $changea;} ?>">
       <label for="changed">Cambiar direcci&oacute;n de domicilio: </label>
-      <input name="changea" type="text" placeholder="<?php if(isset($changed)){ echo $changed; }?>">
+      <input name="changed" type="text" placeholder="<?php if (isset($changed)) {echo $changed;} ?>">
       <input type="submit" name="datos" value="Actualizar">
     </form>
   </main>
