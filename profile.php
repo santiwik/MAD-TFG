@@ -131,11 +131,17 @@
     <form method="post">
       <legend>Cambiar datos Personales </legend>
       <label for="changen">Cambiar nombre: </label>
-      <input name="changen" type="text" placeholder="<?php if (isset($changen)) { echo $changen;} ?>">
+      <input name="changen" type="text" placeholder="<?php if (isset($changen)) {
+                                                        echo $changen;
+                                                      } ?>">
       <label for="changea">Cambiar apellido: </label>
-      <input name="changea" type="text" placeholder="<?php if (isset($changea)) {echo $changea;} ?>">
+      <input name="changea" type="text" placeholder="<?php if (isset($changea)) {
+                                                        echo $changea;
+                                                      } ?>">
       <label for="changed">Cambiar direcci&oacute;n de domicilio: </label>
-      <input name="changed" type="text" placeholder="<?php if (isset($changed)) {echo $changed;} ?>">
+      <input name="changed" type="text" placeholder="<?php if (isset($changed)) {
+                                                        echo $changed;
+                                                      } ?>">
       <input type="submit" name="datos" value="Actualizar">
     </form>
   </main>
