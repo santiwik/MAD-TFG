@@ -78,7 +78,6 @@
     ?>
   </header>
   <main>
-
     <form method="post">
       <legend>
         <h1>Iniciar Sesi&oacute;n</h1>
@@ -86,18 +85,18 @@
       <div class="input-text">
         <?php
         if (isset($_SESSION["error"])) {
-          echo "<div>";
+          echo "<div class=error>";
           echo $_SESSION["error"];
           unset($_SESSION["error"]);
           echo "</div>";
         }
         ?>
         <label for="user"> </label>
-        <input type="text" name="user" placeholder="Usuario">
+        <input type="text" name="user" placeholder=" Usuario">
       </div>
       <div class="input-text">
         <label for="pwd"></label>
-        <input type="password" name="pwd" placeholder="Contraseña">
+        <input type="password" name="pwd" placeholder=" Contraseña">
       </div>
       <div>
         <input type="submit" value="Iniciar Sesi&oacute;n" name="login">

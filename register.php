@@ -69,35 +69,34 @@
     </header>
     <main>
         <form method="post">
-            <legend>Reg&iacute;strate</legend>
-            <div>
-                <label for="user">Usuario: </label>
-                <input type="text" name="user" required>
+            <legend><h1>Reg&iacute;strate</h1></legend>
+            <div class="input-text">
+                <input type="text" name="user" placeholder="Usuario" required>
             </div>
-            <div>
-                <label for="user">Email: </label>
-                <input type="email" name="email" required>
+            <div class="input-text">
+
+                <input type="email" name="email" placeholder="Email"required>
             </div>
-            <div>
-                <label for="pwd">Contrase&ntilde;a: </label>
-                <input type="password" name="pwd" required>
+            <div class="input-text">
+                
+                <input type="password" name="pwd" placeholder="Contraseña" required>
             </div>
-            <div>
-                <label for="pwd">Confirmar contrase&ntilde;a: </label>
-                <input type="password" name="cpwd" required>
+            <div class="input-text">
+                
+                <input type="password" name="cpwd" placeholder="Confirmar contraseña" required>
             </div>
-            <div>
+            <div class="input-text">
                 <input type="submit" value="Iniciar Sesi&oacute;n" name="registro">
             </div>
             <?php
             if (isset($_SESSION["error"])) {
-                echo "<div>";
+                echo '<div class="Error">';
                 echo $_SESSION["error"];
                 unset($_SESSION["error"]);
                 echo "</div>";
             }
             ?>
-            <div>
+            <div  class="input-text">
                 <input type="submit" name="google" value="Registrate con Google">
             </div>
             <p>¿Tienes cuenta? <a href="register.php">Inicia sesi&oacute;n</a></p>
