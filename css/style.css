@@ -21,9 +21,14 @@ body {
 }
 
 body {
-  background: url(../img/2793904f-94aa-402b-a8a8-f1fa14ab5756.jpg) no-repeat
-    center center fixed;
+  position: relative; /* Para posicionar el pseudo-elemento correctamente */
+  background-image:
+    linear-gradient(to bottom, rgba(211, 24, 24, 0.5), rgba(255, 94, 0, 0.147)), 
+    url(../img/2793904f-94aa-402b-a8a8-f1fa14ab5756.jpg);
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   width: 100%;
 }
 
