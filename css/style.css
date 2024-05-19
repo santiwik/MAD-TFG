@@ -73,10 +73,23 @@ h1 {
   color: #ffff;
 }
 
-main div input[type="submit"] {
-cursor: pointer;
-background-color: white;
-color: black;
+.input-text input[type="submit"] {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+.input-text input[type="submit"]:hover {
+  background-color: rgb(228, 14, 14);
+  color: white;
+}
+form a{
+  color: rgb(2, 2, 2);
+  transition: transform 0.5s ease;
+}
+form a:hover{
+  transform: scale(1.1);
 }
 div p {
   text-align: center;
