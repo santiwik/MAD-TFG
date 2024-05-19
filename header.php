@@ -2,12 +2,12 @@
 
 <?php
 if (!isset($_SESSION["user"])) {
-    echo '<div>';
+    echo '<div class="user">';
     echo '    <a href="login.php">Inicia sesión</a>';
     echo '    <a href="register.php">Regístrate</a>';
     echo '</div>';
 } else {
-    echo '<div>';
+    echo '<div class="user">';
     echo '    <a href="profile.php"><i class="fa-solid fa-user fa-2xl"></i></a>';
     echo '</div>';
 }
