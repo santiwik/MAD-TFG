@@ -108,3 +108,7 @@ div p {
   min-height: 7em;
 }
 
+.user{
+  display: flex;
+  gap: 2em;
+}
