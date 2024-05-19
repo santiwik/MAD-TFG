@@ -81,3 +81,19 @@ color: black;
 div p {
   text-align: center;
 }
+
+/* HEADER */
+
+.header{
+  width: 100%;
+  background-color: #303c4c;
+  display: flex;
+  justify-content: space-between;
+  
+  
+}
+
+.header h1{
+  text-align: center;
+  flex-grow: 1;
+}

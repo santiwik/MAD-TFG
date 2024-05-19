@@ -1,3 +1,5 @@
+
+<div class="header">
 <h1><a href="index.php">MAD-TFG</a></h1>
 
 <?php
@@ -12,3 +14,4 @@ if (!isset($_SESSION["user"])) {
     echo '</div>';
 }
 ?>
+</div>
