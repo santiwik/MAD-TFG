@@ -61,7 +61,7 @@
       if (password_verify($_POST["pwd"], $pwd) && $usrconfirm == true) {
         $_SESSION["user"] = $_POST["user"];
         $_SESSION["rol"] = $row["rol"];
-        header("profile.php");
+        header("Location:profile.php");
       } else {
         $_SESSION["error"] = "La contraseña es incorrecta";
       }

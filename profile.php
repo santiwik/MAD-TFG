@@ -8,13 +8,12 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://kit.fontawesome.com/76fb5d8fe4.js" crossorigin="anonymous"></script>
   <?php
-
-  use Google\Service\Classroom\Name;
-
   session_start();
   include "connection.php";
   require_once 'vendor/autoload.php';
   require_once 'config.php';
+
+  // Google Client Configuration
   $client = new Google_Client();
   $client->setClientId($clientID);
   $client->setClientSecret($clientSecret);
@@ -22,165 +21,156 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  if (isset($_GET['code']) &&  $_SESSION["google"] = 1) {
+  if (isset($_GET['code']) && $_SESSION["google"] = 1) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     $client->setAccessToken($token['access_token']);
 
     $google_oauth = new Google_Service_Oauth2($client);
     $google_account_info = $google_oauth->userinfo->get();
-    $email =  $google_account_info->email;
-    $name =  $google_account_info->name;
+    $email = $google_account_info->email;
+    $name = $google_account_info->name;
 
-    /*Registro google*/
-    $sql = $conn->prepare("select user from usuarios where user=?");
+    $sql = $conn->prepare("SELECT user FROM usuarios WHERE user=?");
     $sql->bind_param("s", $name);
     $sql->execute();
     $result = $sql->get_result();
     if ($result->num_rows != 1) {
-      $sql = $conn->prepare("insert into usuarios(user,email) values(?,?)");
+      $sql = $conn->prepare("INSERT INTO usuarios(user,email) VALUES(?,?)");
       $sql->bind_param("ss", $name, $email);
       $sql->execute();
     }
     $_SESSION["user"] = $name;
-    $sql = $conn->prepare("select rol from usuarios where user=?");
+    $sql = $conn->prepare("SELECT rol FROM usuarios WHERE user=?");
     $sql->bind_param("s", $name);
     $sql->execute();
     $result = $sql->get_result();
     if ($row = $result->fetch_assoc()) {
       $_SESSION["rol"] = $row["rol"];
     }
+    $_SESSION["Google"] = 1;
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
   }
+
   if (isset($_POST["cerrar"])) {
     session_destroy();
-    header("Location:index.php");
+    header("Location: index.php");
+    exit;
   }
+
   if (isset($_SESSION["user"])) {
-    $sql = $conn->prepare("select * from usuarios where user=?");
+    $sql = $conn->prepare("SELECT * FROM usuarios WHERE user=?");
     $sql->bind_param("s", $_SESSION["user"]);
     $sql->execute();
     $result = $sql->get_result();
     $row = $result->fetch_assoc();
-    if (is_null($row["name"])) {
-      $changen = "Porfavor añada su nombre";
-    } else {
-      $changen = $row["name"];
-    }
-    if (is_null($row["surname"])) {
-      $changea = "Porfavor añada su apellido";
-    } else {
-      $changea = $row["surname"];
-    }
-    if (is_null($row["direction"])) {
-      $changed = "Porfavor añada su direcci&oacute;n de domicilio";
-    } else {
-      $changed = $row["direction"];
-    }
-    if (isset($_POST["datos"])) {
-      $changen2 = !empty($_POST['changen']) ? $_POST['changen'] : null;
-      $changea2 = !empty($_POST['changea']) ? $_POST['changea'] : null;
-      $changed2 = !empty($_POST['changed']) ? $_POST['changed'] : null;
-
-      if ($changen2 !== null || $changea2 !== null || $changed2 !== null) {
-        if ($changen2 !== null) {
-          $sql = $conn->prepare("UPDATE usuarios SET name = ? WHERE id = ?");
-          $sql->bind_param("ss", $changen2, $row["id"]);
-          if (!$sql->execute()) {
-            echo "Error al actualizar el nombre: " . $sql->error;
-          }
-        }
-        if ($changea2 !== null) {
-          $sql = $conn->prepare("UPDATE usuarios SET surname = ? WHERE id = ?");
-          $sql->bind_param("ss", $changea2, $row["id"]);
-          if (!$sql->execute()) {
-            echo "Error al actualizar el apellido: " . $sql->error;
-          }
-        }
-        if ($changed2 !== null) {
-          $sql = $conn->prepare("UPDATE usuarios SET direction = ? WHERE id = ?");
-          $sql->bind_param("ss", $changed2, $row["id"]);
-          if (!$sql->execute()) {
-            echo "Error al actualizar la dirección: " . $sql->error;
-          }
-        }
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-      } else {
-        echo "No se proporcionaron datos para actualizar.";
-      }
-      if (isset($_POST["pwdchange"])) {
-        $sql = $conn->prepare("select pwd from usuarios where user=?");
-        $sql->bind_param("s", $_SESSION["user"]);
-        $sql->execute();
-        $result = $sql->get_result();
-        if ($row = $result->fetch_assoc()) {
-          $pwd = $row["pwd"];
-        }
-        if (!is_null($pwd)) {
-          if ($_POST["changec1"] == $_POST["changec2"] && password_verify($_POST["changec"], $pwd)) {
-            echo "hola";
-          }
-        } else {
-          $_SESSION["error"] = "Porfavor inicice sesion con una cuenta que no sea de google para cambiar la contraseña";
-        }
-      }
-    }
+    $changen = is_null($row["name"]) ? "Porfavor añada su nombre" : $row["name"];
+    $changea = is_null($row["surname"]) ? "Porfavor añada su apellido" : $row["surname"];
+    $changed = is_null($row["direction"]) ? "Porfavor añada su direcci&oacute;n de domicilio" : $row["direction"];
   }
 
+  if (isset($_POST["datos"])) {
+    $changen2 = !empty($_POST['changen']) ? $_POST['changen'] : null;
+    $changea2 = !empty($_POST['changea']) ? $_POST['changea'] : null;
+    $changed2 = !empty($_POST['changed']) ? $_POST['changed'] : null;
+
+    if ($changen2 !== null) {
+      $sql = $conn->prepare("UPDATE usuarios SET name = ? WHERE id = ?");
+      $sql->bind_param("ss", $changen2, $row["id"]);
+      $sql->execute();
+    }
+    if ($changea2 !== null) {
+      $sql = $conn->prepare("UPDATE usuarios SET surname = ? WHERE id = ?");
+      $sql->bind_param("ss", $changea2, $row["id"]);
+      $sql->execute();
+    }
+    if ($changed2 !== null) {
+      $sql = $conn->prepare("UPDATE usuarios SET direction = ? WHERE id = ?");
+      $sql->bind_param("ss", $changed2, $row["id"]);
+      $sql->execute();
+    }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+  }
+
+  if (isset($_POST["pwdchange"])) {
+    $sql = $conn->prepare("SELECT pwd FROM usuarios WHERE user=?");
+    $sql->bind_param("s", $_SESSION["user"]);
+    $sql->execute();
+    $result = $sql->get_result();
+    if ($row = $result->fetch_assoc()) {
+      $pwd = $row["pwd"];
+    }
+
+    if (!is_null($pwd) && password_verify($_POST["changec"], $pwd)) {
+      if ($_POST["changec1"] == $_POST["changec2"]) {
+        $hash = password_hash($_POST["changec1"], PASSWORD_DEFAULT);
+        $sql = $conn->prepare("UPDATE usuarios SET pwd=? WHERE user=?");
+        $sql->bind_param("ss", $hash, $_SESSION["user"]);
+        if ($sql->execute()) {
+          echo "Contraseña actualizada con éxito.";
+          session_destroy();
+          header("Location: index.php");
+          exit;
+        } else {
+          echo "Error al actualizar la contraseña: " . $sql->error;
+        }
+      } else {
+        echo "Las nuevas contraseñas no coinciden.";
+      }
+    } elseif (isset($_SESSION["Google"])) {
+      echo "Por favor inicie sesión con una cuenta que no sea de Google para cambiar la contraseña.";
+    } else {
+      echo "La contraseña actual es incorrecta o no se ha proporcionado.";
+    }
+  }
   ?>
 </head>
 
 <body>
   <header>
-    <?php
-    include "header.php";
-    ?>
+    <?php include "header.php"; ?>
   </header>
   <main>
-    <?php
-    if (isset($_SESSION["error"])) {
-      echo "<div>";
-      echo $_SESSION["error"];
-      unset($_SESSION["error"]);
-      echo "</div>";
-    }
-    ?>
-    <!--Cerrado de sesion-->
+    <?php if (isset($_SESSION["error"])) : ?>
+      <div>
+        <?php
+        echo $_SESSION["error"];
+        unset($_SESSION["error"]);
+        ?>
+      </div>
+    <?php endif; ?>
+
+    <!-- Cerrado de sesion -->
     <form method="post">
       <input type="submit" name="cerrar" value="Cerrar Sesión">
     </form>
-    <!--Cambio de nombre-->
+
+    <!-- Cambio de nombre -->
     <form method="post">
-      <legend>Cambiar datos Personales </legend>
+      <legend>Cambiar datos Personales</legend>
       <label for="changen">Cambiar nombre: </label>
-      <input name="changen" type="text" placeholder="<?php if (isset($changen)) {
-                                                        echo $changen;
-                                                      } ?>">
+      <input name="changen" type="text" placeholder="<?php echo $changen; ?>">
       <label for="changea">Cambiar apellido: </label>
-      <input name="changea" type="text" placeholder="<?php if (isset($changea)) {
-                                                        echo $changea;
-                                                      } ?>">
+      <input name="changea" type="text" placeholder="<?php echo $changea; ?>">
       <label for="changed">Cambiar direcci&oacute;n de domicilio: </label>
-      <input name="changed" type="text" placeholder="<?php if (isset($changed)) {
-                                                        echo $changed;
-                                                      } ?>">
+      <input name="changed" type="text" placeholder="<?php echo $changed; ?>">
       <input type="submit" name="datos" value="Actualizar">
     </form>
+
+    <!-- Cambio de contraseña -->
     <form method="post">
       <legend>Cambiar la contraseña</legend>
       <label for="changec">Contrase&ntilde;a actual: </label>
       <input name="changec" type="password">
-      <label for="changec">Nueva contrase&ntilde;a: </label>
+      <label for="changec1">Nueva contrase&ntilde;a: </label>
       <input name="changec1" type="password">
-      <label for="changec">Confirme nueva contrase&ntilde;a: </label>
+      <label for="changec2">Confirme nueva contrase&ntilde;a: </label>
       <input name="changec2" type="password">
       <input type="submit" name="pwdchange" value="Cambiar contraseña">
     </form>
   </main>
-  <footer>
-
-  </footer>
+  <footer></footer>
 </body>
 
 </html>
