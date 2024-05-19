@@ -84,11 +84,11 @@ h1 {
   background-color: rgb(228, 14, 14);
   color: white;
 }
-form a{
+form a {
   color: rgb(2, 2, 2);
   transition: transform 0.5s ease;
 }
-form a:hover{
+form a:hover {
   transform: scale(1.1);
 }
 div p {
@@ -97,21 +97,14 @@ div p {
 
 /* HEADER */
 
-.header{
+.header {
   width: 100%;
   background-color: #303c4c;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: space-between;
-  
-  
+  position: fixed !important;
+  z-index: 2;
+  min-height: 7em;
 }
 
-.header h1{
- flex:1 ;
-text-align: center;
-}
-
-.user{
-  
-}
