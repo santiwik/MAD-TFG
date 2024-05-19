@@ -121,7 +121,7 @@
           if ($_POST["changec1"] == $_POST["changec2"] && password_verify($_POST["changec"], $pwd)) {
             echo "hola";
           }
-        } else{
+        } else {
           $_SESSION["error"] = "Porfavor inicice sesion con una cuenta que no sea de google para cambiar la contraseña";
         }
       }
