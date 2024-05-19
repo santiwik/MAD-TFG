@@ -98,10 +98,10 @@
         <label for="pwd"></label>
         <input type="password" name="pwd" placeholder=" Contraseña">
       </div>
-      <div>
+      <div class="input-text">
         <input type="submit" value="Iniciar Sesi&oacute;n" name="login">
       </div>
-      <div>
+      <div class="input-text">
         <input type="submit" name="google" value="Iniciar sesión con Google">
       </div>
       <p>¿No tienes cuenta? <a href="register.php">Registrate</a></p>
