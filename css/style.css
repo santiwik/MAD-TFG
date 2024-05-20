@@ -39,7 +39,7 @@ main {
   align-items: center;
 }
 
-main > form {
+main  form {
   backdrop-filter: blur(18px);
   background-color: rgba(129, 124, 124, 0.61);
   min-width: 420px;
@@ -85,7 +85,7 @@ h1 {
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 
-.input-text input[type="submit"]:hover {
+.input-text input[type="submit"]:hover{
   background-color: rgb(228, 14, 14);
   color: white;
 }
@@ -102,18 +102,44 @@ div p {
 
 /* HEADER */
 
-.header {
+header {
   width: 100%;
   background-color: #303c4c;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   position: fixed !important;
   z-index: 2;
   min-height: 7em;
 }
 
-.user{
+#user{
   display: flex;
   gap: 1em;
+}
+
+#cat{
+  display: flex;
+  gap: 1em;
+}
+header a{
+  transition: transform 200ms;
+}
+header a:hover{
+  transform: scale(1.2);
+}
+#cerrar_sesion{
+  border: 0;
+  margin: 0 !important;
+  padding: 0;
+  border-radius: 0;
+  position: fixed !important;
+  z-index: 2;
+  bottom: 2%;
+  right: 2%;
+  width: 1%; 
+}
+#registro{
+  display: flex;
+  gap: 2em;
 }

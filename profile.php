@@ -67,6 +67,10 @@
     $changen = is_null($row["name"]) ? "Porfavor añada su nombre" : $row["name"];
     $changea = is_null($row["surname"]) ? "Porfavor añada su apellido" : $row["surname"];
     $changed = is_null($row["direction"]) ? "Porfavor añada su direcci&oacute;n de domicilio" : $row["direction"];
+  } else{
+    header("Location: login.php");
+    $_SESSION["error"]="<p>Porfavor inicie sesion para acceder</p>";
+    exit;
   }
 
   if (isset($_POST["datos"])) {
@@ -142,33 +146,55 @@
     <?php endif; ?>
 
     <!-- Cerrado de sesion -->
-    <form method="post">
-      <input type="submit" name="cerrar" value="Cerrar Sesión">
+    <form method="post" id="cerrar_sesion" class="input-text">
+        <input type="submit" name="cerrar" value="Cerrar Sesión">
     </form>
 
     <!-- Cambio de nombre -->
-    <form method="post">
-      <legend>Cambiar datos Personales</legend>
-      <label for="changen">Cambiar nombre: </label>
-      <input name="changen" type="text" placeholder="<?php echo $changen; ?>">
-      <label for="changea">Cambiar apellido: </label>
-      <input name="changea" type="text" placeholder="<?php echo $changea; ?>">
-      <label for="changed">Cambiar direcci&oacute;n de domicilio: </label>
-      <input name="changed" type="text" placeholder="<?php echo $changed; ?>">
-      <input type="submit" name="datos" value="Actualizar">
-    </form>
+    <div id="registro">
+      <form method="post">
+        <legend>
+          <h2>Cambiar datos Personales</h2>
+        </legend>
+        <div class="input-text">
+          <label for="changen">Cambiar nombre: </label>
+          <input name="changen" type="text" placeholder="<?php echo $changen; ?>">
+        </div>
+        <div class="input-text">
+          <label for="changea">Cambiar apellido: </label>
+          <input name="changea" type="text" placeholder="<?php echo $changea; ?>">
+        </div>
+        <div class="input-text">
+          <label for="changed">Cambiar direcci&oacute;n de domicilio: </label>
+          <input name="changed" type="text" placeholder="<?php echo $changed; ?>">
+        </div>
+        <div class="input-text">
+          <input type="submit" name="datos" value="Actualizar">
+        </div>
+      </form>
 
-    <!-- Cambio de contraseña -->
-    <form method="post">
-      <legend>Cambiar la contraseña</legend>
-      <label for="changec">Contrase&ntilde;a actual: </label>
-      <input name="changec" type="password">
-      <label for="changec1">Nueva contrase&ntilde;a: </label>
-      <input name="changec1" type="password">
-      <label for="changec2">Confirme nueva contrase&ntilde;a: </label>
-      <input name="changec2" type="password">
-      <input type="submit" name="pwdchange" value="Cambiar contraseña">
-    </form>
+      <!-- Cambio de contraseña -->
+      <form method="post">
+        <legend>
+          <h2>Cambiar la contraseña</h2>
+        </legend>
+        <div class="input-text">
+          <label for="changec">Contrase&ntilde;a actual: </label>
+          <input name="changec" type="password">
+        </div>
+        <div class="input-text">
+          <label for="changec1">Nueva contrase&ntilde;a: </label>
+          <input name="changec1" type="password">
+        </div>
+        <div class="input-text">
+          <label for="changec2">Confirme nueva contrase&ntilde;a: </label>
+          <input name="changec2" type="password">
+        </div>
+        <div class="input-text">
+          <input type="submit" name="pwdchange" value="Cambiar contraseña">
+        </div>
+      </form>
+    </div>
   </main>
   <footer></footer>
 </body>
