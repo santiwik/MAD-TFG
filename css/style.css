@@ -124,11 +124,18 @@ header {
   display: flex;
   gap: 1em;
 }
-header a{
+header form input, header form, header a{
   transition: transform 200ms;
 }
-header a:hover{
-  transform: scale(1.2);
+header form input{
+  background-color: unset;
+  border: unset;
+  color: #ffff;
+  font-size:medium;
+}
+header form input:hover, header form:hover,  header a:hover{
+  transform: scale(1.1);
+  cursor: pointer;
 }
 #cerrar_sesion{
   border: 0;
