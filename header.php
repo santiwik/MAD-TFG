@@ -9,6 +9,12 @@ while ($row = $result->fetch_assoc()) {
     $id = $row["id"];
     echo '<a href="category.php?id='.$id.'">'.$name.'</a>';
 }
+if(isset($_SESSION["rol"])){
+    if($_SESSION["rol"]!=1){
+        echo '<a href="admin.php">Administrar la pagina</a>';
+    }
+    
+}
 ?>
 </div>
 <?php

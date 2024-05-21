@@ -131,7 +131,7 @@
   ?>
 </head>
 
-<body>
+<body class="login">
   <header>
     <?php include "header.php"; ?>
   </header>

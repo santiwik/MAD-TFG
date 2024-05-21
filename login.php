@@ -62,7 +62,7 @@
         $_SESSION["user"] = $_POST["user"];
         $_SESSION["rol"] = $row["rol"];
         $_SESSION["id"] = $row["id"];
-        header("Location:profile.php");
+        header("Location:index.php");
       } else {
         $_SESSION["error"] = "La contraseña es incorrecta";
       }
@@ -71,8 +71,7 @@
 
   ?>
 </head>
-
-<body>
+<body class="login">
   <header>
     <?php
     include "header.php";

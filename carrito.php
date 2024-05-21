@@ -35,14 +35,14 @@
     ?>
 </head>
 
-<body>
+<body class="login">
     <header>
         <?php
         include "header.php";
         ?>
     </header>
     <main>
-
+        <div id="no-form">
         <?php
         $total = 0;
         if (!empty($_SESSION["carro"])) {
@@ -80,7 +80,7 @@
             echo '</table>';
             echo '</form>';
             echo '<form method="post">';
-            echo '    <input id="boton-enviar" value="Pagar" type="submit" name="pagar">';
+            echo '    <input id="botonpago" value="Pagar" type="submit" name="pagar">';
             echo '</form>';
             if(isset($_POST["pagar"])) {
                 $sql = $conn->prepare("INSERT INTO pedidos (user_id, total_price) VALUES (?, ?)");
@@ -106,6 +106,7 @@
             unset($_SESSION["msg"]); // Limpiar el mensaje después de mostrarlo
         }
         ?>
+        </div>
     </main>
     <footer>
 

@@ -1,29 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
+
 a {
   text-decoration: none;
-  color: rgb(255, 255, 255); /*Cambiar a negro en caso de necesitar*/
+  color: rgb(255, 255, 255);
 }
-/*Mensaje error*/
+
+/* Mensaje error */
 .error {
   color: rgb(126, 0, 0);
 }
 
-/* css del login */
+/* CSS del login */
 
 html,
 body {
   height: 100% !important;
 }
 
-body {
-  position: relative; /* Para posicionar el pseudo-elemento correctamente */
-  background-image:
-    linear-gradient(to bottom, rgba(211, 24, 24, 0.5), rgba(255, 94, 0, 0.147)), 
+.login {
+  position: relative;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(211, 24, 24, 0.5),
+      rgba(255, 94, 0, 0.147)
+    ),
     url(../img/2793904f-94aa-402b-a8a8-f1fa14ab5756.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -39,7 +45,7 @@ main {
   align-items: center;
 }
 
-main  form {
+main form {
   backdrop-filter: blur(18px);
   background-color: rgba(129, 124, 124, 0.61);
   min-width: 420px;
@@ -53,11 +59,13 @@ main  form {
   justify-content: space-between;
   gap: 20px;
 }
+
 h1 {
   font-size: 36px;
   text-align: center;
 }
-/* diseño de los cuadros de texto */
+
+/* Diseño de los cuadros de texto */
 
 .input-text {
   width: 100%;
@@ -85,17 +93,20 @@ h1 {
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 
-.input-text input[type="submit"]:hover{
+.input-text input[type="submit"]:hover {
   background-color: rgb(228, 14, 14);
   color: white;
 }
+
 form a {
   color: rgb(2, 2, 2);
   transition: transform 0.5s ease;
 }
+
 form a:hover {
   transform: scale(1.1);
 }
+
 div p {
   text-align: center;
 }
@@ -103,52 +114,235 @@ div p {
 /* HEADER */
 
 header {
-  
-  
   width: 100%;
-  background-color: #581a3a;
+  background-color: #111111;;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: fixed !important;
-  z-index: 2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   min-height: 7em;
 }
-
-#user{
+.login {
+  position: fixed;
+}
+#user {
   display: flex;
   gap: 1em;
 }
 
-#cat{
+#cat {
   display: flex;
   gap: 1em;
 }
-header form input, header form, header a{
+
+header a {
   transition: transform 200ms;
 }
-header form input{
-  background-color: unset;
-  border: unset;
-  color: #ffff;
-  font-size:medium;
-}
-header form input:hover, header form:hover,  header a:hover{
+
+header a:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
-#cerrar_sesion{
+
+#cerrar_sesion {
   border: 0;
   margin: 0 !important;
   padding: 0;
   border-radius: 0;
-  position: fixed !important;
+  position: fixed;
   z-index: 2;
   bottom: 2%;
   right: 2%;
-  width: 1%; 
+  width: 1%;
 }
-#registro{
+
+#registro {
   display: flex;
   gap: 2em;
+}
+#no_flex {
+  display: block;
+}
+/* Index */
+.banner {
+  background-image: url(../img/PLP-Hero-Agnostic-1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+  background-attachment: fixed;
+  color: #ffff;
+  padding: 5% 0 5% 5%;
+}
+.banner h1 {
+  text-align: left;
+}
+#indx a {
+  color: black !important;
+}
+#indx {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 3em;
+}
+.product {
+  width: 23%;
+  height: 100%;
+}
+.product a {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1em;
+  background-color: #00000011;
+  padding: 2em;
+  border-radius: 0.5em;
+  transition: transform 200ms;
+}
+#indx img {
+  width: 100%;
+  border-radius: 1em;
+}
+.product a:hover {
+  transform: scale(1.05);
+}
+
+/*ruta*/
+#ruta {
+  background-color: rgb(43, 42, 41);
+  color: rgb(173, 172, 170);
+  padding: 1em 0 1em 3em;
+}
+#ruta a {
+  color: rgb(173, 172, 170);
+}
+#producto {
+  margin: 1%;
+  display: flex;
+  justify-content: space-around;
+}
+#producto > img {
+  width: 66%;
+  border-radius: 3em;
+}
+#producto > div {
+  background-color: rgb(37, 36, 35);
+  color: white;
+  border-radius: 0.5em;
+  padding: 5% 6%;
+  width: 30%;
+  margin-left: 1em;
+}
+#producto > div > div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+#producto form {
+  backdrop-filter: initial;
+  background-color: initial;
+  min-width: initial;
+  border: initial;
+  color: initial;
+  border-radius: initial;
+  padding: initial;
+  width: 100%;
+  margin-top: 1em;
+}
+#producto input{
+  background-color: white;
+  padding: 1em 0;
+  border: none;
+  border-radius: 2em;
+  transition: background-color 200ms, color 200ms;
+  cursor: pointer;
+}
+#producto input:hover{
+  background-color: red;
+  color: white;
+}
+
+#producto  p {
+  text-align: left !important;
+  margin-top: 1em;
+}
+
+/*Carrito*/
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000000;
+  background-color: #333; 
+  color: #fff; 
+}
+
+
+th {
+  background-color: #555; 
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #00000000;
+}
+
+td {
+  padding: 10px;
+  border: 1px solid #dddddd00;
+}
+
+tr:nth-child(even) {
+  background-color: #444; 
+}
+button {
+  background-color: #00000000;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bolder;
+  border-radius: 1em;
+  transition: background-color 200ms, color 200ms;
+}
+button[name="restar"], button[name="sumar"]{
+  width: 2em;
+}
+button:hover{
+  background-color: red;
+  color: white;
+}
+#botonpago {
+  background-color: #1b201c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 200ms;
+
+}
+#botonpago:hover{
+  background-color: #000000;
+}
+#no-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: #0c0c0c46;
+  backdrop-filter: blur(18px);
+  padding: 2%;
+  border-radius: 5%;
+  color: white;
+  border: #000000 solid 1px;
+}
+#no-form form{
+  backdrop-filter: initial;
+  background-color: initial;
+  min-width: initial;
+  border: initial;
+  color: initial;
+  border-radius: initial;
+  padding: initial;
 }

@@ -19,9 +19,11 @@
         include "header.php";
         ?>
     </header>
-    <main>
-        <h2>Nuevos productos</h2>
-        <div id="contprod">
+    <main id="no_flex">
+        <div class="banner">
+        <h1>Nuevos productos</h1>
+        </div>
+        <div id="indx">
             <?php
             $sql = $conn->prepare("select * from producto order by id desc");
             $sql->execute();

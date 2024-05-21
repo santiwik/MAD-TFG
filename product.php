@@ -33,14 +33,14 @@
         exit;
     }
     if (isset($_POST["btncarrito"]) && isset($_SESSION["user"])) {
-        if (isset($_SESSION["carro"][$idprod])){
+        if (isset($_SESSION["carro"][$idprod])) {
             $_SESSION["carro"][$idprod]["cant"]++;
         } else {
             $_SESSION["carro"][$idprod] = array(
                 "idprod" => $idprod,
                 "nameprod" => $nameprod,
                 "precioprod" => $precioprod,
-                "cant" => 1  
+                "cant" => 1
             );
         }
         $_SESSION["msg"] = '<p id="msg">Se añadio correctamente al carrito</p>';
@@ -59,24 +59,27 @@
         include "header.php";
         ?>
     </header>
-    <main id="pagprod">
+    <main id="no_flex">
         <p id="ruta"><a href="index.php"><i class="fa-solid fa-house"></i></a> > <a href="category.php?id=<?php echo $idcat; ?>"><?php echo $namecat; ?></a> > <?php echo $nameprod; ?> </p>
-        <div>
+        <div id="producto">
             <img src="img/products/<?php echo $idprod; ?>.png" alt="Producto">
             <div>
-                <h1><?php echo $nameprod; ?></h1>
-                <p id="precio"> <?php echo $precioprod; ?></p>
-            </div>
-            <form id="btncarrito" method="post">
-                <input type="submit" name="btncarrito" value="<?php echo $precioprod; ?> - Añadir al Carrito">
+                <div>
+                    <h1><?php echo $nameprod; ?></h1>
+                    <p id="precio"> <?php echo $precioprod; ?></p>
+                </div>
+                <form  method="post">
+                    <input type="submit" name="btncarrito" value="<?php echo $precioprod; ?> - Añadir al Carrito">
+                    
+                </form>
                 <?php
-                if (isset($_SESSION["msg"])) {
-                    echo $_SESSION["msg"];
-                    unset($_SESSION["msg"]);
-                }
+                    if (isset($_SESSION["msg"])) {
+                        echo $_SESSION["msg"];
+                        unset($_SESSION["msg"]);
+                    }
                 ?>
-            </form>
-            <p id="descripcion"><?php echo $descripcionprod; ?></p>
+                <p><?php echo $descripcionprod; ?></p>
+            </div>
         </div>
     </main>
     <footer>
