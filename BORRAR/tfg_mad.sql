@@ -1,8 +1,9 @@
 drop database tfg_mad;
 create database tfg_mad;
 use tfg_mad;
+-- Servidor: 127
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2024 a las 16:39:25
+-- Tiempo de generación: 21-05-2024 a las 23:42:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -54,6 +55,13 @@ CREATE TABLE `pedidos` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `user_id`, `total_price`, `date`) VALUES
+(1, 3, 25.99, '2024-05-21 20:18:07');
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +75,13 @@ CREATE TABLE `pedido_producto` (
   `quantity` int(11) NOT NULL,
   `precio` decimal(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedido_producto`
+--
+
+INSERT INTO `pedido_producto` (`id`, `pedido_id`, `producto_id`, `quantity`, `precio`) VALUES
+(1, 1, 2, 1, 25.99);
 
 -- --------------------------------------------------------
 
@@ -100,6 +115,9 @@ INSERT INTO `producto` (`id`, `name`, `descripcion`, `precio`, `category`, `stoc
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `Update` tinyint(1) NOT NULL,
+  `Insert` tinyint(1) NOT NULL,
+  `Delete` tinyint(1) NOT NULL,
   `count` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -107,8 +125,9 @@ CREATE TABLE `roles` (
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `count`) VALUES
-(1, 'Usuario normal', NULL);
+INSERT INTO `roles` (`id`, `name`, `Update`, `Insert`, `Delete`, `count`) VALUES
+(1, 'Usuario normal', 0, 0, 0, NULL),
+(2, 'Admin', 1, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,8 +152,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `user`, `name`, `surname`, `email`, `pwd`, `rol`, `whencreated`, `direction`) VALUES
-(2, 'santiwik ___', NULL, NULL, 'danielsantiso04@gmail.com', NULL, 1, '2024-05-11 15:05:12', ''),
-(3, 'dani', NULL, NULL, 'dani@gmail.com', '$2y$10$Pq5jKF0Pm2BtPgwBrQg5aOtlKylgiDLcLX1DFfHza0/tm6DGcbsIe', 1, '2024-05-20 14:27:16', 'dad');
+(2, 'santiwik ___', NULL, NULL, 'danielsantiso04@gmail.com', NULL, 2, '2024-05-21 21:22:45', ''),
+(3, 'dani', NULL, NULL, 'dani@gmail.com', '$2y$10$Pq5jKF0Pm2BtPgwBrQg5aOtlKylgiDLcLX1DFfHza0/tm6DGcbsIe', 2, '2024-05-21 20:28:15', 'dad');
 
 --
 -- Índices para tablas volcadas
@@ -196,13 +215,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -214,7 +233,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
