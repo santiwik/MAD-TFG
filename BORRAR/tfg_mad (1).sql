@@ -1,9 +1,8 @@
 drop database tfg_mad;
 create database tfg_mad;
 use tfg_mad;
-
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2024 a las 17:17:49
+-- Tiempo de generación: 21-05-2024 a las 16:39:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -83,6 +82,14 @@ CREATE TABLE `producto` (
   `category` int(11) NOT NULL,
   `stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `name`, `descripcion`, `precio`, `category`, `stock`) VALUES
+(1, 'Camiseta roja', 'Efectivamente es una camiseta roja', 40.99, 1, 9),
+(2, 'Pantalones vaqueros', 'Efectivamente, son Pantalones vaqueros', 25.99, 2, 92);
 
 -- --------------------------------------------------------
 
@@ -189,7 +196,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_producto`
@@ -201,7 +208,7 @@ ALTER TABLE `pedido_producto`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

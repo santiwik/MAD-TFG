@@ -13,8 +13,6 @@
         header("Location:profile.php");
         exit();
     }
-
-    /*Google*/
     require_once 'vendor/autoload.php';
     require_once 'config.php';
 
@@ -31,8 +29,6 @@
         header("Location: $authUrl");
         exit();
     }
-
-    /*Registro*/
     if (isset($_POST["registro"])) {
         /*Error Usuario*/
         $sql = $conn->prepare("select user from usuarios where user = ?");

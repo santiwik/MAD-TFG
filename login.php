@@ -50,7 +50,7 @@
     }
     /*Contraseña*/
     if ($usrconfirm == true) {
-      $sql = $conn->prepare("select pwd, rol from usuarios where user=?");
+      $sql = $conn->prepare("select * from usuarios where user=?");
       $sql->bind_param("s", $_POST["user"]);
       $sql->execute();
       $result = $sql->get_result();
@@ -61,6 +61,7 @@
       if (password_verify($_POST["pwd"], $pwd) && $usrconfirm == true) {
         $_SESSION["user"] = $_POST["user"];
         $_SESSION["rol"] = $row["rol"];
+        $_SESSION["id"] = $row["id"];
         header("Location:profile.php");
       } else {
         $_SESSION["error"] = "La contraseña es incorrecta";

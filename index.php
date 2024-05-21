@@ -20,7 +20,27 @@
         ?>
     </header>
     <main>
+        <h2>Nuevos productos</h2>
+        <div id="contprod">
+            <?php
+            $sql = $conn->prepare("select * from producto order by id desc");
+            $sql->execute();
+            $result = $sql->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $idprod = $row["id"];
+                $Nombre = $row["name"];
+                $precio = $row["precio"];
+                echo '<div class="product">';
+                echo '<a href="product.php?idprod=' . $idprod . '">';
+                echo '<img src="img/products/' . $idprod . '.png">';
+                echo '<p>' . $Nombre . '</p>';
+                echo '<p class="precio">' . $precio . '</p>';
+                echo '</a>';
+                echo '</div>';
+            }
 
+            ?>
+        </div>
     </main>
     <footer>
 
