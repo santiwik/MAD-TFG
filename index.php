@@ -28,18 +28,21 @@
             $sql = $conn->prepare("select * from producto order by id desc");
             $sql->execute();
             $result = $sql->get_result();
+            $counter = 0;
             while ($row = $result->fetch_assoc()) {
+                if ($counter >= 16) {
+                    break;
+                }
                 $idprod = $row["id"];
                 $Nombre = $row["name"];
                 $precio = $row["precio"];
-
                 echo '<a  class="product" href="product.php?idprod=' . $idprod . '">';
                 echo '<img src="img/products/' . $idprod . '.png">';
                 echo '<p>' . $Nombre . '</p>';
                 echo '<p class="precio">' . $precio . '</p>';
                 echo '</a>';
+                $counter++;
             }
-
             ?>
         </div>
     </main>
