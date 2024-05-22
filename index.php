@@ -32,13 +32,12 @@
                 $idprod = $row["id"];
                 $Nombre = $row["name"];
                 $precio = $row["precio"];
-                echo '<div class="product">';
-                echo '<a href="product.php?idprod=' . $idprod . '">';
+
+                echo '<a  class="product" href="product.php?idprod=' . $idprod . '">';
                 echo '<img src="img/products/' . $idprod . '.png">';
                 echo '<p>' . $Nombre . '</p>';
                 echo '<p class="precio">' . $precio . '</p>';
                 echo '</a>';
-                echo '</div>';
             }
 
             ?>

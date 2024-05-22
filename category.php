@@ -20,7 +20,7 @@
     $sql->execute();
     $result = $sql->get_result();
     if ($row = $result->fetch_assoc()) {
-        $name = $row["name"];
+        $namec = $row["name"];
         $descripcion = $row["descripcion"];
     }
     ?>
@@ -33,25 +33,31 @@
         include "header.php";
         ?>
     </header>
-    <main>
-        <?php
-        $sql = $conn->prepare("select * from producto where category = ?");
-        $sql->bind_param("s", $idc);
-        $sql->execute();
-        $result = $sql->get_result();
-        while ($row = $result->fetch_assoc()) {
-            $p = $row["id"];
-            $N = $row["name"];
-            $pre = $row["precio"];
-            echo '<div class="product">';
-            echo '<a href="product.php?idprod=' . $p . '">';
-            echo '<img src="img/products/' . $p . '.png">';
-            echo '<p>' . $N . '</p>';
-            echo '<p class="precio">' . $pre . '</p>';
-            echo '</a>';
-            echo '</div>';
-        }
-        ?>
+    <main id="no_flex">
+        <div class="banner">
+            <h1><?php echo $namec;?></h1>
+        </div>
+        <div id="indx">
+            <?php
+            $sql = $conn->prepare("select * from producto where category = ?");
+            $sql ->bind_param("s", $idc);
+            $sql->execute();
+            $result = $sql->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $idprod = $row["id"];
+                $Nombre = $row["name"];
+                $precio = $row["precio"];
+                echo '<div class="product">';
+                echo '<a href="product.php?idprod=' . $idprod . '">';
+                echo '<img src="img/products/' . $idprod . '.png">';
+                echo '<p>' . $Nombre . '</p>';
+                echo '<p class="precio">' . $precio . '</p>';
+                echo '</a>';
+                echo '</div>';
+            }
+
+            ?>
+        </div>
     </main>
     <footer>
 

@@ -164,6 +164,7 @@ header a:hover {
 }
 #no_flex {
   display: block;
+  height: 100%;
 }
 /* Index */
 .banner {
@@ -185,27 +186,27 @@ header a:hover {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  margin-top: 3em;
+  flex-wrap: wrap;
+  align-items: stretch;
 }
-.product {
-  width: 23%;
-  height: 100%;
-}
-.product a {
+
+.product  {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   gap: 1em;
   background-color: #00000011;
   padding: 2em;
   border-radius: 0.5em;
   transition: transform 200ms;
+  flex: 0 0 calc(20% - 30px);
+  margin-top: 2em;
+  
 }
 #indx img {
   width: 100%;
   border-radius: 1em;
 }
-.product a:hover {
+.product:hover {
   transform: scale(1.05);
 }
 
