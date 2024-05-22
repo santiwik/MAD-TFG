@@ -1,6 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+drop database tfg_mad;
+create database tfg_mad;
+use tfg_mad;
 --
 -- Servidor: 127.0.0.1
 -- Tiempo de generación: 22-05-2024 a las 17:56:35
