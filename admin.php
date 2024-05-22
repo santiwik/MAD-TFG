@@ -59,6 +59,9 @@ if (isset($_POST['add_category'])) {
 // Eliminar Categoría
 if (isset($_POST['delete_category'])) {
     if ($_POST['category_id'] != 0) {
+        $sql = $conn->prepare("DELETE FROM producto WHERE category = ?");
+        $sql->bind_param("s", $_POST['category_id']);
+        $sql->execute();
         $sql = $conn->prepare("DELETE FROM categoria WHERE id = ?");
         $sql->bind_param("s", $_POST['category_id']);
         if ($sql->execute()) {
