@@ -11,20 +11,23 @@
     include "connection.php";
     if (isset($_GET["id"])) {
         $idc = $_GET["id"];
+        $sql = $conn->prepare("select * from categoria where id = ?");
+        $sql->bind_param("s", $idc);
+        $sql->execute();
+        $result = $sql->get_result();
+        if ($row = $result->fetch_assoc()) {
+            $namec = $row["name"];
+            $descripcion = $row["descripcion"];
+        } else {
+            header("Location: index.php");
+            exit;
+        }
     } else {
         header("Location: index.php");
         exit;
     }
-    $sql = $conn->prepare("select * from categoria where id = ?");
-    $sql->bind_param("s", $idc);
-    $sql->execute();
-    $result = $sql->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $namec = $row["name"];
-        $descripcion = $row["descripcion"];
-    }
     ?>
-    <title><?php echo $name; ?></title>
+    <title><?php echo $namec; ?></title>
 </head>
 
 <body>
@@ -35,12 +38,12 @@
     </header>
     <main id="no_flex">
         <div class="banner">
-            <h1><?php echo $namec;?></h1>
+            <h1><?php echo $namec; ?></h1>
         </div>
         <div id="indx">
             <?php
             $sql = $conn->prepare("select * from producto where category = ?");
-            $sql ->bind_param("s", $idc);
+            $sql->bind_param("s", $idc);
             $sql->execute();
             $result = $sql->get_result();
             while ($row = $result->fetch_assoc()) {
@@ -60,9 +63,9 @@
         </div>
     </main>
     <footer>
-    <?php 
-    include "footer.php";
-    ?>
+        <?php
+        include "footer.php";
+        ?>
     </footer>
 </body>
 
