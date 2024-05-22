@@ -357,3 +357,43 @@ footer{
   color: white;
   margin-top: 3em;
 }
+
+/* administardores */
+#no_flex form{
+  
+  background-color: #333;
+}
+#no_flex h2{
+font-size: 30px;
+text-align: center;
+}
+
+#no_flex input[type=submit]{
+  font-size:20px;
+  background-color: tomato;
+  width: 30%;
+  
+  margin-left: 35%;
+  height: 40px;
+  border-radius: 10px;
+  
+}
+#no_flex input[type=submit]:hover{
+  font-size:20px;
+  color: tomato;
+  background-color: #555;
+  width: 30%;
+  
+  margin-left: 35%;
+  height: 40px;
+  border-radius: 10px;
+}
+#no_flex label{
+  font-size: 30px;
+}
+#no_flex select{
+  width: 30%;
+}
+#no_flex input [type="submit"][name="subrol"]{
+  margin-left:0%;
+}
