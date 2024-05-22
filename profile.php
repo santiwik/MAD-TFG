@@ -21,7 +21,7 @@
   $client->addScope("email");
   $client->addScope("profile");
 
-  if (isset($_GET['code']) && $_SESSION["google"] = 1) {
+  if (isset($_GET['code']) && $_SESSION["google"] == 1) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     $client->setAccessToken($token['access_token']);
 
@@ -33,19 +33,21 @@
     $sql = $conn->prepare("SELECT user FROM usuarios WHERE user=?");
     $sql->bind_param("s", $name);
     $sql->execute();
-    $result = $sql->get_result();
-    if ($result->num_rows != 1) {
-      $sql = $conn->prepare("INSERT INTO usuarios(user,email) VALUES(?,?)");
-      $sql->bind_param("ss", $name, $email);
-      $sql->execute();
+    $result1 = $sql->get_result();
+    if ($result1->num_rows != 1) {
+      $sql_i = $conn->prepare("INSERT INTO usuarios(user,email) VALUES(?,?)");
+      $sql_i->bind_param("ss", $name, $email);
+      $sql_i->execute();
     }
+
     $_SESSION["user"] = $name;
-    $sql = $conn->prepare("SELECT rol FROM usuarios WHERE user=?");
+    $sql = $conn->prepare("SELECT * FROM usuarios WHERE user=?");
     $sql->bind_param("s", $name);
     $sql->execute();
     $result = $sql->get_result();
     if ($row = $result->fetch_assoc()) {
       $_SESSION["rol"] = $row["rol"];
+      $_SESSION["id"] = $row["id"];
     }
     $_SESSION["Google"] = 1;
     header("Location: " . $_SERVER['PHP_SELF']);
@@ -63,13 +65,18 @@
     $sql->bind_param("s", $_SESSION["user"]);
     $sql->execute();
     $result = $sql->get_result();
-    $row = $result->fetch_assoc();
-    $changen = is_null($row["name"]) ? "Porfavor añada su nombre" : $row["name"];
-    $changea = is_null($row["surname"]) ? "Porfavor añada su apellido" : $row["surname"];
-    $changed = is_null($row["direction"]) ? "Porfavor añada su direcci&oacute;n de domicilio" : $row["direction"];
-  } else{
+    if ($row = $result->fetch_assoc()) {
+      $changen = isset($row["name"]) ? $row["name"] : "Porfavor añada su nombre";
+      $changea = isset($row["surname"]) ? $row["surname"] : "Porfavor añada su apellido";
+      $changed = isset($row["direction"]) ? $row["direction"] : "Porfavor añada su dirección de domicilio";
+    } else {
+      $changen = "Porfavor añada su nombre";
+      $changea = "Porfavor añada su apellido";
+      $changed = "Porfavor añada su dirección de domicilio";
+    }
+  } else {
     header("Location: login.php");
-    $_SESSION["error"]="<p>Porfavor inicie sesion para acceder</p>";
+    $_SESSION["error"] = "<p>Porfavor inicie sesion para acceder</p>";
     exit;
   }
 
@@ -102,9 +109,7 @@
     $sql->bind_param("s", $_SESSION["user"]);
     $sql->execute();
     $result = $sql->get_result();
-    if ($row = $result->fetch_assoc()) {
-      $pwd = $row["pwd"];
-    }
+    $pwd = $row["pwd"];
 
     if (!is_null($pwd) && password_verify($_POST["changec"], $pwd)) {
       if ($_POST["changec1"] == $_POST["changec2"]) {
@@ -112,20 +117,20 @@
         $sql = $conn->prepare("UPDATE usuarios SET pwd=? WHERE user=?");
         $sql->bind_param("ss", $hash, $_SESSION["user"]);
         if ($sql->execute()) {
-          echo "Contraseña actualizada con éxito.";
+          $_SESSION["error"] = "Contraseña actualizada con éxito.";
           session_destroy();
           header("Location: index.php");
           exit;
         } else {
-          echo "Error al actualizar la contraseña: " . $sql->error;
+          $_SESSION["error"] = "Error al actualizar la contraseña: " . $sql->error;
         }
       } else {
-        echo "Las nuevas contraseñas no coinciden.";
+        $_SESSION["error"] = "Las nuevas contraseñas no coinciden.";
       }
     } elseif (isset($_SESSION["Google"])) {
-      echo "Por favor inicie sesión con una cuenta que no sea de Google para cambiar la contraseña.";
+      $_SESSION["error"] = "Por favor inicie sesión con una cuenta que no sea de Google para cambiar la contraseña.";
     } else {
-      echo "La contraseña actual es incorrecta o no se ha proporcionado.";
+      $_SESSION["error"] = "La contraseña actual es incorrecta o no se ha proporcionado.";
     }
   }
   ?>
@@ -136,23 +141,23 @@
     <?php include "header.php"; ?>
   </header>
   <main>
-    <?php if (isset($_SESSION["error"])) : ?>
-      <div>
-        <?php
-        echo $_SESSION["error"];
-        unset($_SESSION["error"]);
-        ?>
-      </div>
-    <?php endif; ?>
 
     <!-- Cerrado de sesion -->
     <form method="post" id="cerrar_sesion" class="input-text">
-        <input type="submit" name="cerrar" value="Cerrar Sesión">
+      <input type="submit" name="cerrar" value="Cerrar Sesión">
     </form>
 
     <!-- Cambio de nombre -->
     <div id="registro">
       <form method="post">
+      <?php
+         if (isset($_SESSION["error"])){
+        echo '<p class="error">';
+        echo $_SESSION["error"];
+        echo '</p>';
+        unset($_SESSION["error"]);
+      }
+        ?>
         <legend>
           <h2>Cambiar datos Personales</h2>
         </legend>
@@ -196,7 +201,6 @@
       </form>
     </div>
   </main>
-  <footer></footer>
 </body>
 
 </html>

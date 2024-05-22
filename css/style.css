@@ -164,7 +164,7 @@ header a:hover {
 }
 #no_flex {
   display: block;
-  height: 100%;
+  height: unset;
 }
 /* Index */
 .banner {
@@ -346,4 +346,14 @@ button:hover{
   color: initial;
   border-radius: initial;
   padding: initial;
+}
+/*Footer*/
+footer{
+  background-color: #111111;
+  display: flex;
+  padding:  3em 6em;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  margin-top: 3em;
 }

@@ -354,6 +354,9 @@ if (isset($_POST['update_product'])) {
         ?>
     </main>
     <footer>
+    <?php 
+    include "footer.php";
+    ?>
     </footer>
 </body>
 

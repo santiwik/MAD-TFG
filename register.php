@@ -82,7 +82,7 @@
                 <input type="password" name="cpwd" placeholder="Confirmar contraseña" required>
             </div>
             <div class="input-text">
-                <input type="submit" value="Iniciar Sesi&oacute;n" name="registro">
+                <input type="submit" value="Registrarse" name="registro">
             </div>
             <?php
             if (isset($_SESSION["error"])) {
@@ -92,10 +92,8 @@
                 echo "</div>";
             }
             ?>
-            <div  class="input-text">
-                <input type="submit" name="google" value="Registrate con Google">
-            </div>
-            <p>¿Tienes cuenta? <a href="register.php">Inicia sesi&oacute;n</a></p>
+
+            <p>¿Tienes cuenta? <a href="login.php">Inicia sesi&oacute;n</a></p>
         </form>
     </main>
     <footer>
