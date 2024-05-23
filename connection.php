@@ -1,6 +1,6 @@
 <?php
     $servername = "localhost";
-    $dbname = "TFG_MAD";
+    $dbname = "tfg_mad";
     $username = "MAD";
     $password = "Qwerty-1234";
     $conn = new mysqli($servername, $username, $password, $dbname);
