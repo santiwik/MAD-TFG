@@ -53,7 +53,7 @@
     // Añadir Categoría
     if (isset($_POST['add_category'])) {
         if (!empty($_POST['name']) && !empty($_POST['descripcion'])) {
-            $sql = $conn->prepare("INSERT INTO categoria (name, descripcion, count) VALUES (?, ?, 0)");
+            $sql = $conn->prepare("INSERT INTO categoria (name, descripcion) VALUES (?, ?)");
             $sql->bind_param("ss", $_POST['name'], $_POST['descripcion']);
             if ($sql->execute()) {
                 $_SESSION["msg"] = "<p>Categoría añadida correctamente.</p>";
@@ -357,7 +357,7 @@
             ?>
         </div>
     </main>
-    <footer>
+    <footer id="adminfoot">
         <?php
         include "footer.php";
         ?>

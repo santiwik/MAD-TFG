@@ -357,7 +357,9 @@ footer{
   color: white;
   margin-top: 3em;
 }
-
+#adminfoot{
+  margin-top: 0;
+}
 /* administardores */
 .admin div:last-child{
   display: flex;
@@ -379,6 +381,7 @@ footer{
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
+  padding-bottom: 3em;
 }
 .admin form{
 

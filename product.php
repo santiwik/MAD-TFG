@@ -18,7 +18,6 @@
         $nameprod = $row["name"];
         $descripcionprod = $row["descripcion"];
         $precioprod = $row["precio"];
-        
         $categoryprod = $row["category"];
         $sql = $conn->prepare("select name, id from categoria where id = ?");
         $sql->bind_param("s", $categoryprod);
